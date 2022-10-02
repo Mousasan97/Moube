@@ -1,0 +1,684 @@
+/*defaults*/
+html {
+  font-family: 'SFPD', sans-serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+html,
+body {
+  scroll-padding-top: 130px;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  height: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  background: radial-gradient(#d8d8d8 50%, #bababa);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.darkbody {
+  background: #222222;
+  /* background: radial-gradient(#222222 50%, #1a1a1a); */
+  color: rgb(235, 235, 235);
+}
+/* body::after {
+  content: '';
+  display: block;
+  height: 100px;
+} */
+img {
+  width: 100%;
+}
+
+/* text */
+a {
+  color: inherit;
+}
+p {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 7px 0;
+}
+p strong {
+  font-weight: 500;
+}
+h1 {
+  font-weight: 300;
+  font-size: 56px;
+}
+h2 {
+  font-weight: 300;
+  font-size: 40px;
+}
+h3 {
+  font-weight: 400;
+  font-size: 32px;
+}
+.card h3 {
+  font-weight: 900;
+  font-size: 18px;
+}
+section:not(.items) p,
+section:not(.items) h1,
+section:not(.items) h2,
+section:not(.items) h3,
+section:not(.items) h4,
+section:not(.items) h5,
+section:not(.items) h6 {
+  margin: 10px 0;
+}
+.quote {
+  font-style: italic;
+  font-weight: 200;
+}
+.container {
+  padding: 10px;
+  margin: 20px auto;
+  max-width: 900px;
+  text-align: center;
+}
+.container section {
+  margin-bottom: 50px;
+}
+.raised {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+}
+@media screen and (max-width: 767px) {
+  .raised {
+    margin: 20px 3%;
+  }
+}
+.dark {
+  background: #222;
+  color: white;
+}
+
+/* standard info sections */
+.overview {
+  overflow: hidden;
+}
+@media screen and (min-width: 768px) {
+  .overview {
+    height: 350px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: left;
+  }
+  .overview > div {
+    width: 50%;
+  }
+  .overview .intro-text {
+    padding: 30px;
+  }
+  .overview.reverse {
+    flex-direction: row-reverse;
+  }
+  .overview.reverse .intro-img {
+    transform-origin: left;
+  }
+}
+@media screen and (max-width: 767px) {
+  .overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: left;
+  }
+  .overview .intro-img {
+    overflow: hidden;
+    width: 100%;
+    max-height: 250px;
+    display: flex;
+    align-items: center;
+  }
+  .overview .intro-text {
+    padding: 5px 20px 20px;
+  }
+}
+.items.raised {
+  padding: 20px 10%;
+}
+.items.raised h1,
+.items.raised h2 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+.items.raised h4 {
+  margin: 30px 0 15px;
+}
+/* fix anchor positioning by offsetting a pseudo-element */
+/* section.anchored:before {
+  content: '';
+  display: block;
+  position: relative;
+  width: 0;
+  height: 130px;
+  margin-top: -130px;
+} */
+
+/* selector */
+.selector-filter {
+  position: sticky;
+  width: 100%;
+  flex: 0 0 40%;
+  align-self: flex-start;
+  top: 67px;
+  z-index: 5;
+}
+.selector-items {
+  width: 100%;
+}
+.selector-items .intro {
+  margin: 20px 0;
+}
+@media screen and (min-width: 768px) {
+  .selector {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+  .selector-items .card {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .selector {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .selector-filter {
+    backdrop-filter: blur(5px) saturate(0.5);
+  }
+}
+
+/* material button with ripple shadow etc */
+.material-button {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  padding: 0 16px;
+  min-width: 64px;
+  height: 36px;
+  vertical-align: middle;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+  background-color: rgb(var(--pure-material-primary-rgb, 63, 81, 181));
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 36px;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.material-button.raised {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.material-button.dark {
+  background: white;
+  color: #222222;
+  border: 2px solid lightgray;
+  transition: background 0.1s, padding 0.5s, border-radius 0.5s, color 1s;
+}
+/* Overlay */
+.material-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+/* Ripple */
+.ripple::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  padding: 50%;
+  width: 32px; /* Safari */
+  height: 32px; /* Safari */
+  background-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 1s, transform 0.5s;
+}
+/* Hover, Focus */
+.material-button.raised:hover,
+.material-button.raised:focus {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.material-button.dark:hover,
+.material-button.dark:focus {
+  background: transparent;
+  color: white;
+  padding: 0 20px;
+  border-radius: 10px;
+}
+.material-button:hover::before {
+  opacity: 0.08;
+}
+.material-button:focus::before {
+  opacity: 0.24;
+}
+.material-button:hover:focus::before {
+  opacity: 0.3;
+}
+/* Active */
+.material-button:active {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+.material-button:active::after {
+  opacity: 0.32;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0s;
+}
+/* Disabled */
+.material-button:disabled {
+  color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+  background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
+  box-shadow: none;
+  cursor: initial;
+}
+.material-button:disabled::before {
+  opacity: 0;
+}
+.material-button:disabled::after {
+  opacity: 0;
+}
+/* end material-button */
+
+/* Blog: recents */
+.recents .article-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+.recents .article-grid .article {
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+@media screen and (min-width: 768px) {
+  .recents .article-grid .article {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .recents .article-grid .article {
+    width: 100%;
+  }
+}
+
+/*SFPD font*/
+/*ultralight thin light regular - medium - semibold bold heavy black*/
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 100;
+  src: url('~assets/fonts/SFPD/SFPD-Ultralight.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Ultralight.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 100;
+  src: url('~assets/fonts/SFPD/SFPD-UltralightItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-UltralightItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 200;
+  src: url('~assets/fonts/SFPD/SFPD-Thin.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Thin.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 200;
+  src: url('~assets/fonts/SFPD/SFPD-ThinItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-ThinItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 300;
+  src: url('~assets/fonts/SFPD/SFPD-Light.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Light.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 300;
+  src: url('~assets/fonts/SFPD/SFPD-LightItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-LightItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 400;
+  src: url('~assets/fonts/SFPD/SFPD-Regular.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 400;
+  src: url('~assets/fonts/SFPD/SFPD-RegularItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-RegularItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 500;
+  src: url('~assets/fonts/SFPD/SFPD-Medium.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 500;
+  src: url('~assets/fonts/SFPD/SFPD-MediumItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-MediumItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 600;
+  src: url('~assets/fonts/SFPD/SFPD-Semibold.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Semibold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 600;
+  src: url('~assets/fonts/SFPD/SFPD-SemiboldItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-SemiboldItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 700;
+  src: url('~assets/fonts/SFPD/SFPD-Bold.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 700;
+  src: url('~assets/fonts/SFPD/SFPD-BoldItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-BoldItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 800;
+  src: url('~assets/fonts/SFPD/SFPD-Heavy.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Heavy.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 800;
+  src: url('~assets/fonts/SFPD/SFPD-HeavyItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-HeavyItalic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: normal;
+  font-weight: 900;
+  src: url('~assets/fonts/SFPD/SFPD-Black.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-Black.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SFPD';
+  font-style: italic;
+  font-weight: 900;
+  src: url('~assets/fonts/SFPD/SFPD-BlackItalic.woff') format('woff'),
+    url('~assets/fonts/SFPD/SFPD-BlackItalic.woff2') format('woff2');
+  font-display: swap;
+}
+/* fancy background */
+@keyframes wavedient {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* bounce - button click animation */
+.bounce {
+  animation: bounce 0.4s cubic-bezier(0, 1, 0.88, 1);
+}
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.9);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* fancy underlining - https://css-irl.info/animating-underlines/ */
+.fancy a,
+.fancyul {
+  text-decoration: none;
+  background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(0, 100, 200, 1)
+    );
+  background-size: 100% 0.1em, 0 0.1em;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+.fancy a:hover,
+.fancy a:focus,
+.fancyul:hover,
+.fancyul:focus {
+  background-size: 0 0.1em, 100% 0.1em;
+}
+
+/* TOOLTIP STYLING */
+[tooltip] {
+  position: relative; /* opinion 1 */
+}
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  font-size: 16px;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  z-index: 1001; /* absurdity 1 */
+}
+[tooltip]::after {
+  content: attr(tooltip); /* magic! */
+  text-align: center;
+  min-width: 3em;
+  max-width: 21em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: 0.3ch;
+  box-shadow: 0 1em 2em -0.5em rgba(0, 0, 0, 0.35);
+  background: #333;
+  color: #fff;
+  z-index: 1000; /* absurdity 2 */
+}
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+/* hide empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+/* FLOW: INSIDE */
+[tooltip]:not([flow])::after,
+[tooltip][flow^='in']::after {
+  top: 10px;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^='in']::after {
+  left: 50%;
+  transform: translate(-50%, 20px);
+}
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^='up']::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^='up']::after {
+  bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^='up']::before,
+[tooltip][flow^='up']::after {
+  left: 50%;
+  transform: translate(-50%, -0.5em);
+}
+/* FLOW: DOWN */
+[tooltip][flow^='down']::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+[tooltip][flow^='down']::after {
+  top: calc(100% + 5px);
+}
+[tooltip][flow^='down']::before,
+[tooltip][flow^='down']::after {
+  left: 50%;
+  transform: translate(-50%, 0.5em);
+}
+/* FLOW: LEFT */
+[tooltip][flow^='left']::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(0.5em, -50%);
+}
+[tooltip][flow^='left']::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(0.5em, -50%);
+}
+/* FLOW: RIGHT */
+[tooltip][flow^='right']::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(-0.5em, -50%);
+}
+[tooltip][flow^='right']::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(-0.5em, -50%);
+}
+/* animations */
+@keyframes tooltips-v {
+  to {
+    opacity: 0.9;
+    transform: translate(-50%, 0);
+  }
+}
+@keyframes tooltips-h {
+  to {
+    opacity: 0.9;
+    transform: translate(0, -50%);
+  }
+}
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^='in']:hover::after,
+[tooltip][flow^='up']:hover::before,
+[tooltip][flow^='up']:hover::after,
+[tooltip][flow^='down']:hover::before,
+[tooltip][flow^='down']:hover::after {
+  animation: tooltips-v 0.25s ease-out forwards;
+}
+[tooltip][flow^='left']:hover::before,
+[tooltip][flow^='left']:hover::after,
+[tooltip][flow^='right']:hover::before,
+[tooltip][flow^='right']:hover::after {
+  animation: tooltips-h 0.25s ease-out forwards;
+}
+/* END TOOLTIP STYLING */
